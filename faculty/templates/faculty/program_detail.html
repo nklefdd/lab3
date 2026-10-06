@@ -1,0 +1,41 @@
+{% extends "faculty/base.html" %}
+{% block title %}{{ program.name }} | Факультет гуманітарних наук{% endblock %}
+{% block content %}
+  <section class="intro">
+    <p class="eyebrow">{{ program.code }} · {{ program.get_level_display }} рівень</p>
+    <h1>{{ program.name }}</h1>
+  </section>
+  <section class="detail-panel">
+    <dl class="details-list">
+      <dt>Опис</dt>
+      <dd>
+        {{ program.description|linebreaksbr }}
+      </dd>
+      <dt>Дисципліни</dt>
+      <dd>
+        <ul class="plain-list">
+          {% for discipline in program.disciplines_list %}
+            <li>{{ discipline }}</li>
+          {% empty %}
+            <li>Список дисциплін ще не додано.</li>
+          {% endfor %}
+        </ul>
+      </dd>
+      <dt>Випускова кафедра</dt>
+      <dd>
+        <a class="text-link" href="{% url 'faculty:department-detail' program.department.id %}">{{ program.department.name }}</a>
+      </dd>
+      <dt>Координатор набору</dt>
+      <dd>
+        {{ program.coordinator_name }}
+      </dd>
+      <dt>Контакт координатора</dt>
+      <dd>
+        {{ program.coordinator_contact }}
+      </dd>
+    </dl>
+  </section>
+  <p>
+    <a class="text-link" href="{% url 'faculty:program-list' %}">← Усі спеціальності</a>
+  </p>
+{% endblock %}

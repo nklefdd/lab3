@@ -1,0 +1,45 @@
+{% extends "faculty/base.html" %}
+{% block title %}Академічний обмін | Факультет гуманітарних наук{% endblock %}
+{% block content %}
+  <section class="intro">
+    <p class="eyebrow">Міжнародні можливості</p>
+    <h1>Програми академічного обміну</h1>
+    <p>Університети-партнери, до яких студенти факультету можуть подати заявку на навчання за обміном.</p>
+  </section>
+  <section class="card-grid" aria-label="Програми обміну">
+    {% for program in programs %}
+      <article class="card">
+        {% if program.is_open %}
+          <p class="status status-open">Прийом триває</p>
+        {% else %}
+          <p class="status status-closed">Прийом завершено</p>
+        {% endif %}
+        <h2>{{ program.university }}</h2>
+        <dl class="details-list">
+          <dt>Країна</dt>
+          <dd>
+            {{ program.country }}
+          </dd>
+          <dt>Опис</dt>
+          <dd>
+            {{ program.description }}
+          </dd>
+          <dt>Мови навчання</dt>
+          <dd>
+            {{ program.languages }}
+          </dd>
+          <dt>Кількість місць</dt>
+          <dd>
+            {{ program.seats }}
+          </dd>
+          <dt>Дедлайн подачі</dt>
+          <dd>
+            {{ program.deadline|date:"d.m.Y" }}
+          </dd>
+        </dl>
+      </article>
+    {% empty %}
+      <p>Програм обміну поки не опубліковано.</p>
+    {% endfor %}
+  </section>
+{% endblock %}

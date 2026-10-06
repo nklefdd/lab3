@@ -1,0 +1,45 @@
+{% extends "faculty/base.html" %}
+{% block title %}{{ department.name }} | Факультет гуманітарних наук{% endblock %}
+{% block content %}
+  <section class="intro">
+    <p class="eyebrow">Кафедра</p>
+    <h1>{{ department.name }}</h1>
+    <p>Завідувач кафедри: {{ department.head }}</p>
+  </section>
+  <section class="detail-panel">
+    <h2>Випускає за спеціальностями</h2>
+    <ul class="plain-list">
+      {% for program in department.programs.all %}
+        <li>
+          <a class="text-link" href="{% url 'faculty:program-detail' program.id %}">{{ program.code }} {{ program.name }}</a>
+          ({{ program.get_level_display }})
+        </li>
+      {% empty %}
+        <li>—</li>
+      {% endfor %}
+    </ul>
+  </section>
+  <h2 class="section-title">Викладачі</h2>
+  <section class="card-grid" aria-label="Викладачі кафедри">
+    {% for teacher in department.teachers.all %}
+      <article class="card">
+        <h3>{{ teacher.name }}</h3>
+        <dl class="details-list">
+          <dt>Посада</dt>
+          <dd>
+            {{ teacher.position }}
+          </dd>
+          <dt>Науковий ступінь</dt>
+          <dd>
+            {{ teacher.degree|default:"—" }}
+          </dd>
+        </dl>
+      </article>
+    {% empty %}
+      <p>Викладачів поки не додано.</p>
+    {% endfor %}
+  </section>
+  <p>
+    <a class="text-link" href="{% url 'faculty:department-list' %}">← Усі кафедри</a>
+  </p>
+{% endblock %}
