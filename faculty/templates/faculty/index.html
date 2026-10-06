@@ -1,0 +1,32 @@
+{% extends "faculty/base.html" %}
+{% block title %}Головна | Факультет гуманітарних наук{% endblock %}
+{% block content %}
+  {% if info %}
+    <section class="intro">
+      <p class="eyebrow">Національний університет «Києво-Могилянська академія»</p>
+      <h1>{{ info.name }}</h1>
+      {{ info.description|linebreaks }}
+    </section>
+    <section class="card-grid" aria-label="Основна інформація">
+      <article class="card">
+        <h2>Кафедри</h2>
+        <ul class="plain-list">
+          {% for department in departments %}
+            <li>
+              <a class="text-link" href="{% url 'faculty:department-detail' department.id %}">{{ department.name }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </article>
+      <article class="card">
+        <h2>Контакти</h2>
+        <p>{{ info.contacts|linebreaksbr }}</p>
+      </article>
+    </section>
+  {% else %}
+    <section class="intro">
+      <h1>Факультет гуманітарних наук</h1>
+      <p>Інформацію про факультет ще не додано в адмінці.</p>
+    </section>
+  {% endif %}
+{% endblock %}

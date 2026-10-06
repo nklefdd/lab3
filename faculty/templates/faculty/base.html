@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Факультет гуманітарних наук{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'faculty/style.css' %}">
+  </head>
+  <body>
+        <header class="site-header">
+      <div class="topbar">
+        <div class="page-shell topbar-inner">
+          <span>Національний університет «Києво-Могилянська академія»</span>
+          <span>
+            <a href="tel:+380444251420">(044) 425-14-20</a>
+            <a href="mailto:humanities@ukma.edu.ua">humanities@ukma.edu.ua</a>
+          </span>
+        </div>
+      </div>
+      <div class="page-shell header-inner">
+        <a class="brand" href="{% url 'faculty:index' %}">
+          <img src="{% static 'faculty/img/logo.png' %}" alt="КМА. Факультет гуманітарних наук">
+        </a>
+        <nav aria-label="Основна навігація">
+          <a href="{% url 'faculty:index' %}">Головна</a>
+          <a href="{% url 'faculty:department-list' %}">Кафедри</a>
+          <a href="{% url 'faculty:program-list' %}">Спеціальності</a>
+          <a href="{% url 'exchange:exchange-list' %}">Академічний обмін</a>
+        </nav>
+      </div>
+    </header>
+    <main class="page-shell">
+      {% block content %}{% endblock %}
+    </main>
+        <footer class="site-footer">
+      <div class="page-shell footer-grid">
+        <div class="footer-brand">
+          <a href="{% url 'faculty:index' %}">
+            <img src="{% static 'faculty/img/logo.png' %}" alt="КМА. Факультет гуманітарних наук">
+          </a>
+          <p class="footer-phone">
+            <a href="tel:+380444251420">(044) 425-14-20</a>
+          </p>
+          <p>
+            Адреса для листування:
+            <br>
+            04070, м. Київ, вул. Г. Сковороди, 2
+          </p>
+          <p>
+            Адреса розташування:
+            <br>
+            м. Київ, вул. Г. Сковороди, 2, корпус 1, кімн. 201–205
+          </p>
+          <p>
+            <a href="mailto:humanities@ukma.edu.ua">humanities@ukma.edu.ua</a>
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Про факультет</h2>
+          <ul class="footer-links">
+            <li>
+              <a href="{% url 'faculty:index' %}">Головна</a>
+            </li>
+            <li>
+              <a href="{% url 'faculty:department-list' %}">Кафедри</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">Вступ та навчання</h2>
+          <ul class="footer-links">
+            <li>
+              <a href="{% url 'faculty:program-list' %}">Спеціальності</a>
+            </li>
+            <li>
+              <a href="{% url 'exchange:exchange-list' %}">Академічний обмін</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">Університет</h2>
+          <ul class="footer-links">
+            <li>
+              <a href="https://ukma.edu.ua/">Сайт НаУКМА</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="page-shell">© {% now "Y" %} Національний університет «Києво-Могилянська академія»</div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+{% extends "faculty/base.html" %}
+{% block title %}Спеціальності | Факультет гуманітарних наук{% endblock %}
+{% block content %}
+  <section class="intro">
+    <p class="eyebrow">Освітні програми</p>
+    <h1>Спеціальності</h1>
+    <p>Спеціальності, за якими факультет гуманітарних наук проводить підготовку студентів.</p>
+  </section>
+  {% for section in sections %}
+    <h2 class="section-title">{{ section.title }}</h2>
+    <section class="card-grid" aria-label="{{ section.title }}">
+      {% for program in section.programs %}
+        <article class="card">
+          <p class="code">{{ program.code }}</p>
+          <h3>
+            <a class="text-link" href="{% url 'faculty:program-detail' program.id %}">{{ program.name }}</a>
+          </h3>
+          <dl class="details-list">
+            <dt>Опис</dt>
+            <dd>
+              {{ program.description|truncatewords:50 }}
+            </dd>
+            <dt>Координатор набору</dt>
+            <dd>
+              {{ program.coordinator_name }}
+            </dd>
+            <dt>Контакт координатора</dt>
+            <dd>
+              {{ program.coordinator_contact }}
+            </dd>
+          </dl>
+        </article>
+      {% empty %}
+        <p>Спеціальностей поки не опубліковано.</p>
+      {% endfor %}
+    </section>
+  {% endfor %}
+{% endblock %}
